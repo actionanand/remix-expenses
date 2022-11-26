@@ -3,9 +3,13 @@
 import { Outlet } from '@remix-run/react';
 
 import expensesStyle from '~/styles/marketing.css';
+import MainHeader from '~/components/navigation/MainHeader';
 
 export default function MarketingPathlessLayout() {
-  return <Outlet />;
+  return <>
+    <MainHeader />
+    <Outlet />
+  </>;
 }
 
 export function links() {
