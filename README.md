@@ -51,3 +51,7 @@ rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
 ```
+
+### Resources
+
+- [Prisma - NextGen NodeJs ORM](https://www.prisma.io/docs/getting-started/quickstart)
