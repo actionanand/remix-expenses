@@ -3,9 +3,13 @@
 import { Outlet } from '@remix-run/react';
 
 import expensesStyle from '~/styles/expenses.css';
+import ExpensesHeader from '~/components/navigation/ExpensesHeader';
 
 export default function ExpensesPathlessLayout() {
-  return <Outlet />;
+  return <>
+    <ExpensesHeader />
+    <Outlet />
+  </>;
 }
 
 export function links() {
