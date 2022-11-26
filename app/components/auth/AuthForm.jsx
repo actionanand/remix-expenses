@@ -1,5 +1,7 @@
 import { FaLock } from 'react-icons/fa';
 
+import { Link } from '@remix-run/react';
+
 function AuthForm() {
   return (
     <form method="post" className="form" id="auth-form">
@@ -16,7 +18,7 @@ function AuthForm() {
       </p>
       <div className="form-actions">
         <button>Login</button>
-        <a href="/auth">Log in with existing user</a>
+        <Link to="/auth">Log in with existing user</Link>
       </div>
     </form>
   );
