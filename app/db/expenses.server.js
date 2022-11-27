@@ -32,3 +32,19 @@ export async function getExpense(id) {
     throw error; 
   }
 }
+
+export async function updateExpense(id, {title, amount, date}) {
+  try {
+    await prisma.expense.update({
+      where: {id},
+      data: {
+        title,
+        amount: +amount,
+        date: new Date(date)
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw error; 
+  }
+}
