@@ -5,7 +5,7 @@ import Error from './components/util/Error';
 
 export const meta = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Remix-Expenses",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -42,15 +42,23 @@ export function CatchBoundary() {
   return <Document title={caughtResp.statusText}>
     <main>
       <Error title={caughtResp.statusText}>
-        <p> {caughtResp.data?.message || 'Something went wrong, Please try again after sometime!'} </p>
+        <p> {caughtResp.data?.message || 'Oops! Not Found, Please try again after sometime!'} </p>
         <p>Back to <Link to='/'> Safty </Link> . </p>
       </Error>
     </main>
   </Document>;
 }
 
-export function ErrorBoundary() {
+export function ErrorBoundary({error}) {
 
+  return <Document title='An Error Occurred!'>
+    <main>
+      <Error title='An Error Occurred!'>
+        <p> {error?.message || 'Something went wrong, Please try again after sometime!'} </p>
+        <p>Back to <Link to='/'> Safty </Link> . </p>
+      </Error>
+    </main>
+  </Document>;
 }
 
 export function links() {

@@ -116,7 +116,7 @@ export function loader({params}) {
   }
 
   throw new Response('Not Found', { status: 404 });
-  // throw Error('Page Not Found!');
+  // throw new Error('Page Not Found!');
   // return null;
 }
 ```
