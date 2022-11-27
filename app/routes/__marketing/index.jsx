@@ -1,12 +1,12 @@
 import { Link } from '@remix-run/react';
-import { FaArrowRight, FaDollarSign, FaChartBar } from 'react-icons/fa';
+import { FaArrowRight, FaRupeeSign, FaChartBar } from 'react-icons/fa';
 
 export default function Index() {
   return (
     <main>
       <section className="marketing-section">
         <header>
-          <FaDollarSign />
+          <FaRupeeSign />
           <h2>A Central Space</h2>
         </header>
         <div className="marketing-content">
