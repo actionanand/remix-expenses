@@ -17,11 +17,12 @@ function ExpenseForm() {
   const expenseData = expensesDate.find(expense => expense.id === params.id);
 
   const submitHandler = e => {
+    const htmlMethod = expenseData ? 'patch' : 'post';
     e.preventDefault();
     // perform client side validations
     submit(e.target, {
       // action: 'expenses/add',
-      method: 'post'
+      method: htmlMethod
     });
   }
 
@@ -38,7 +39,7 @@ function ExpenseForm() {
       };
 
   return (
-    <Form method="post" className="form" id="expense-form" onSubmit={submitHandler}>
+    <Form method={expenseData ? 'patch' : 'post'} className="form" id="expense-form" onSubmit={submitHandler}>
       <p>
         <label htmlFor="title">Expense Title</label>
         <input type="text" id="title" name="title" required maxLength={30} defaultValue={defaultValue.title} />

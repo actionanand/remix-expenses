@@ -9,7 +9,7 @@ export async function addExpense({title, date, amount}) {
     }});
   } catch (error) {
     console.log(error);
-    throw error;
+    throw new Error('Unable to add the expense, Please try again after sometime!'); 
   }
 }
 
@@ -19,7 +19,7 @@ export async function getExpenses() {
     return expenses;
   } catch (error) {
     console.log(error);
-    throw error; 
+    throw new Error('Failed to load all of your expenses, Please try again after sometime!'); 
   }
 }
 
@@ -29,6 +29,31 @@ export async function getExpense(id) {
     return expense;
   } catch (error) {
     console.log(error);
-    throw error; 
+    throw new Error('Failed to load the expense, Please try again after sometime!'); 
+  }
+}
+
+export async function updateExpense(id, {title, amount, date}) {
+  try {
+    await prisma.expense.update({
+      where: {id},
+      data: {
+        title,
+        amount: +amount,
+        date: new Date(date)
+      }
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error('Unable to update the expense, Please try again after sometime!'); 
+  }
+}
+
+export async function deleteExpense(id) {
+  try {
+    await prisma.expense.delete({where: {id}});
+  } catch (error) {
+    console.log(error);
+    throw new Error('Unable to delete the expense, Please try again after sometime!'); 
   }
 }

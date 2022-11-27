@@ -101,3 +101,22 @@ or
 ```bash
 yarn prisma generate
 ```
+
+### Splat Route
+
+- if you want to handle undefinded routes or you want to redirect to some other routes, you can use `splat route`. Splat route will be defined by creating a file as `$.jsx` or `$.tsx` inside `routes` directory. The sample content will follow as below:
+
+```js
+// splat route
+import { redirect } from '@remix-run/node';
+
+export function loader({params}) {
+  if(params['*'] === 'exp') {
+    return redirect('/expenses');
+  }
+
+  throw new Response('Not Found', { status: 404 });
+  // throw new Error('Page Not Found!');
+  // return null;
+}
+```
