@@ -55,3 +55,49 @@ cp -R ../my-old-remix-app/app app
 ### Resources
 
 - [Prisma - NextGen NodeJs ORM](https://www.prisma.io/docs/getting-started/quickstart)
+- [Installing the Prisma CLI](https://www.prisma.io/docs/concepts/components/prisma-cli/installation)
+
+
+### Prisma setup
+
+```sh
+yarn add -D prisma
+```
+
+for `mongodb`:
+
+```bash
+npx prisma init --datasource-provider mongodb
+```
+
+- Model your data in the `Prisma schema` as below (example):
+
+```prisma
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+```
+
+- invoking the `prisma generate`
+
+```sh
+npx prisma generate
+```
+
+or
+
+```bash
+yarn prisma generate
+```
