@@ -1,4 +1,5 @@
-import { Link, useActionData, Form, useSubmit, useTransition as useNavigation, useLoaderData } from '@remix-run/react';
+import { Link, useActionData, Form, useSubmit, useTransition as useNavigation, 
+  useLoaderData, useMatches, useParams } from '@remix-run/react';
 
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -7,7 +8,13 @@ function ExpenseForm() {
   const submit = useSubmit();
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== 'idle';
-  const expenseData = useLoaderData();
+  // const expenseData = useLoaderData();
+  const params = useParams();
+  const matches = useMatches();
+  // useMatches is to get the data from parant loader (not to send second get req. to db)
+  // console.log(matches); // each active routes with id and data will be displayed (id will be in routes folder structure)
+  const expensesDate = matches.find(match => match.id === 'routes/__expenses/expenses').data;
+  const expenseData = expensesDate.find(expense => expense.id === params.id);
 
   const submitHandler = e => {
     e.preventDefault();
