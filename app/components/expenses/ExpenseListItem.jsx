@@ -1,5 +1,7 @@
 import { Link, useFetcher, Form, useSubmit } from '@remix-run/react';
 
+import { formatMyCurrency } from '~/components/util/currency-format';
+
 function ExpenseListItem({ id, title, amount }) {
   // const submit = useSubmit();
   const fetcher = useFetcher(); // if u wanna perform action & don't want to navigate, use 'fetcher' instead 'submit'
@@ -31,7 +33,8 @@ function ExpenseListItem({ id, title, amount }) {
     <article className="expense-item">
       <div>
         <h2 className="expense-title">{title}</h2>
-        <p className="expense-amount">&#8377; {amount.toFixed(2)}</p>
+        {/* <p className="expense-amount">&#8377; {amount.toFixed(2)}</p> */}
+        <p className="expense-amount"> {formatMyCurrency(amount)} </p>
       </div>
       <menu className="expense-actions">
         <button onClick={deleteExpenseItemHandler}>Delete</button>
