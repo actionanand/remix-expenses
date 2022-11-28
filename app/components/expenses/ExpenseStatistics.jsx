@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { formatMyCurrency } from '~/components/util/currency-format';
 
 function calculateSummaryStatistics(expenses) {
   const amounts = expenses.map((expense) => +expense.amount);
@@ -22,19 +23,20 @@ function ExpenseStatistics({ expenses }) {
       <dl id="expense-statistics">
         <div>
           <dt>Total</dt>
-          <dd>&#8377; {sum.toFixed(2)}</dd>
+          {/* <dd>&#8377; {sum.toFixed(2)}</dd> */}
+          <dd>{formatMyCurrency(sum)}</dd>
         </div>
         <div>
           <dt>Average</dt>
-          <dd>&#8377; {mean.toFixed(2)}</dd>
+          <dd>{formatMyCurrency(mean)}</dd>
         </div>
         <div>
           <dt> Min. Amount</dt>
-          <dd>&#8377; {minAmount.toFixed(2)}</dd>
+          <dd>{formatMyCurrency(minAmount)}</dd>
         </div>
         <div>
           <dt>Max. Amount</dt>
-          <dd>&#8377; {maxAmount.toFixed(2)}</dd>
+          <dd>{formatMyCurrency(maxAmount)}</dd>
         </div>
       </dl>
     </section>

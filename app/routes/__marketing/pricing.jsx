@@ -13,7 +13,7 @@ const PRICING_PLANS = [
   {
     id: 'p2',
     title: 'Pro',
-    price: '₹9.99/month',
+    price: '₹650.99 + GST / month',
     perks: ['Unlimited Users', 'Unlimited expenses/year', 'Detailed analytics'],
     icon: FaTrophy
   },
