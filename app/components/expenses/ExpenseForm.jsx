@@ -11,7 +11,7 @@ function ExpenseForm() {
   // const expenseData = useLoaderData();
   const params = useParams();
   const matches = useMatches();
-  // useMatches is to get the data from parant loader (not to send second get req. to db)
+  // useMatches is to get the data from 'parant loader' (not to send second get req. to db) -> only possible if parent has data, not sibling
   // console.log(matches); // each active routes with id and data will be displayed (id will be in routes folder structure)
   const expensesDate = matches.find(match => match.id === 'routes/__expenses/expenses').data;
   const expenseData = expensesDate.find(expense => expense.id === params.id);
@@ -24,6 +24,10 @@ function ExpenseForm() {
       // action: 'expenses/add',
       method: htmlMethod
     });
+  }
+
+  if(params.id && !expenseData) {
+    return <p> Invalid Expense ID.</p>;
   }
 
   const defaultValue = expenseData

@@ -23,6 +23,7 @@ import { getExpenses } from '~/db/expenses.server';
 
 export default function ExpensesLayout() {
   const expenses = useLoaderData();
+  const hasExpenses = expenses && expenses.length > 0;
 
   return <>
     <Outlet />
@@ -37,7 +38,11 @@ export default function ExpensesLayout() {
           Load Raw Data
         </a>
       </section>
-      <ExpensesList expenses={expenses} />
+      {hasExpenses && <ExpensesList expenses={expenses} />}
+      {!hasExpenses && <section id='no-expenses'>
+        <h1>No Expenses Found!</h1>
+        <p>Start <Link to='add'> Adding Some ...</Link></p>
+        </section>}
     </main>
   </>;
 }
@@ -46,12 +51,12 @@ export async function loader({request, params}) {
   try {
     const expenses = await getExpenses();
 
-    if (!expenses || expenses.length === 0) {
-      return json({message: 'Coud not find any expenses!'}, {
-        status: 404,
-        statusText: 'No expenses Found!'
-      });
-    }
+    // if (!expenses || expenses.length === 0) {
+    //   return json({message: 'Coud not find any expenses!'}, {
+    //     status: 404,
+    //     statusText: 'No expenses Found!'
+    //   });
+    // }
 
     return expenses;
     // return json(expenses);
@@ -59,5 +64,10 @@ export async function loader({request, params}) {
     console.log(error);
     throw new Error('Oops!, Failed loading your expenses!');
   }
+}
+
+
+export function CatchBoundary() {
+
 }
 
