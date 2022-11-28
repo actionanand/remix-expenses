@@ -4,7 +4,7 @@ import { Link, useActionData, Form, useSubmit, useTransition as useNavigation,
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
 
-  const validationError = useActionData();
+  const validationErrors = useActionData();
   const submit = useSubmit();
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== 'idle';
@@ -69,9 +69,9 @@ function ExpenseForm() {
         </p>
       </div>
 
-      {validationError && 
+      {validationErrors && 
         <ul>
-          {Object.values(validationError).map(error => <li key={error}> {error} </li>)}
+          {Object.values(validationErrors).map(error => <li key={error}> {error} </li>)}
         </ul>
       }
 

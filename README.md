@@ -102,6 +102,12 @@ or
 yarn prisma generate
 ```
 
+- After creating new `model`, do the following to enforce(initialize) the database
+
+```sh
+yarn prisma db push
+```
+
 ### Splat Route
 
 - if you want to handle undefinded routes or you want to redirect to some other routes, you can use `splat route`. Splat route will be defined by creating a file as `$.jsx` or `$.tsx` inside `routes` directory. The sample content will follow as below:
