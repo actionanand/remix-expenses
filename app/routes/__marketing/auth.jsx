@@ -1,5 +1,9 @@
+import { redirect } from '@remix-run/node';
+
 import authStyles from '~/styles/auth.css';
 import AuthForm from '~/components/auth/AuthForm';
+import { validateCredentials } from '~/db/validation.server';
+import { signup, login } from '~/db/auth.server';
 
 export default function AuthPage() {
   return <AuthForm />;
@@ -11,16 +15,28 @@ export function links() {
 
 export async function action({request}) {
   const searchParams = new URL(request.url).searchParams;
-  const authMode = searchParams.get('mode') || login;
+  const authMode = searchParams.get('mode') || 'login';
 
   const formData = await request.formData();
   const credentials = Object.fromEntries(formData);
 
-  // validate user inputs
+  try {
+    validateCredentials(credentials);
+  } catch (error) {
+    return error;
+  }
 
-  if(authMode === 'login') {
-    // login logic
-  } else {
-    // sign up
+  try {
+    if(authMode === 'login') {
+      return await login(credentials);
+    } else {
+      return await signup(credentials);
+    }
+  } catch (error) {
+    if(error.status === 422 || 401) {
+      return {
+        credentialError: error.message
+      };
+    }
   }
 }
