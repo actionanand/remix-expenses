@@ -45,3 +45,9 @@ export function meta() {
     description: 'Manage your expenses with ease. This page shows the list of price.'
   };
 }
+
+export function headers({actionHeaders, loaderHeaders, parentHeaders}) {
+  return {
+    'Cache-Control': parentHeaders.get('Cache-Control')
+  };
+}

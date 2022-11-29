@@ -47,3 +47,9 @@ export function meta() {
     description: 'Manage your expenses with ease. This page authenticates the users to manage expenses.'
   };
 }
+
+export function headers({actionHeaders, loaderHeaders, parentHeaders}) {
+  return {
+    'Cache-Control': parentHeaders.get('Cache-Control')
+  };
+}

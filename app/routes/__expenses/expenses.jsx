@@ -61,8 +61,13 @@ export async function loader({request, params}) {
     //   });
     // }
 
-    return expenses;
-    // return json(expenses);
+    // return expenses;
+
+    return json(expenses, {
+      headers: {
+        'Cache-Control': 'max-age=3',
+      },
+    });
   } catch (error) {
     console.log(error);
     throw new Error('Oops!, Failed loading your expenses!');
@@ -79,5 +84,11 @@ export function meta() {
   return {
     title: 'Remix-Expenses Expenses\' List',
     description: 'Manage your expenses with ease. This page shows the available expenses.'
+  };
+}
+
+export function headers({actionHeaders, loaderHeaders, parentHeaders}) {
+  return {
+    'Cache-Control': loaderHeaders.get('Cache-Control')
   };
 }
