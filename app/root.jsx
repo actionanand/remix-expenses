@@ -9,12 +9,12 @@ export const meta = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export function Document({children, title='Remix-Expenses'}) {
+export function Document({children, title}) {
   return (
     <html lang="en">
       <head>
         <Meta />
-        <title> {title} </title>
+        {title && <title> {title} </title>}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />

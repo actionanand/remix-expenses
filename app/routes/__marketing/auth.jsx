@@ -40,3 +40,10 @@ export async function action({request}) {
     }
   }
 }
+
+export function meta() {
+  return {
+    title: 'Remix-Expenses Authentication',
+    description: 'Manage your expenses with ease. This page authenticates the users to manage expenses.'
+  };
+}

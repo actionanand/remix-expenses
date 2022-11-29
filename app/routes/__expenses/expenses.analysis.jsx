@@ -47,3 +47,10 @@ export function CatchBoundary() {
     </Error>
   </main>;
 }
+
+export function meta() {
+  return {
+    title: 'Remix-Expenses Analysis',
+    description: 'Analysis your expenses with chart.'
+  };
+}

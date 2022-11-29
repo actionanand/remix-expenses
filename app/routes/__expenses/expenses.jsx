@@ -70,7 +70,14 @@ export async function loader({request, params}) {
 }
 
 
-export function CatchBoundary() {
+// export function CatchBoundary() {
 
+// }
+
+
+export function meta() {
+  return {
+    title: 'Remix-Expenses Expenses\' List',
+    description: 'Manage your expenses with ease. This page shows the available expenses.'
+  };
 }
-
