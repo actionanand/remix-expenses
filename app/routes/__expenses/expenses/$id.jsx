@@ -21,7 +21,7 @@ export default function UpdateExpensesPage() {
 }
 
 export async function action({params, request}) {
-  const userId = await getUserFromSession(request);
+  await getUserFromSession(request);
   const expenseId = params.id;
   const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
@@ -33,11 +33,11 @@ export async function action({params, request}) {
       return error;
     }
   
-    await updateExpense(expenseId, expenseData, userId);
+    await updateExpense(expenseId, expenseData);
     return redirect('/expenses');
     
   } else if(request.method === 'DELETE') {
-    await deleteExpense(expenseId, userId);
+    await deleteExpense(expenseId);
     return {expenseId, content: 'deleted successfully'}
   }
 

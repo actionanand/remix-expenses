@@ -15,6 +15,10 @@ export async function addExpense({title, date, amount}, userId) {
 }
 
 export async function getExpenses(userId) {
+  if(!userId) {
+    throw new Error('Loading the your expenses have failed!, Please try again after sometime!'); 
+  }
+
   try {
     const expenses = await prisma.expense.findMany({
       where: {userId},
@@ -39,10 +43,9 @@ export async function getExpense(id) {
   }
 }
 
-export async function updateExpense(id, {title, amount, date}, userId) {
+export async function updateExpense(id, {title, amount, date}) {
   try {
     await prisma.expense.update({
-      select: { userId },
       where: { id },
       data: {
         title,
@@ -56,11 +59,10 @@ export async function updateExpense(id, {title, amount, date}, userId) {
   }
 }
 
-export async function deleteExpense(id, userId) {
+export async function deleteExpense(id) {
   try {
     await prisma.expense.delete({
-      where: {id},
-      where: {userId}
+      where: {id}
     });
   } catch (error) {
     console.log(error);
