@@ -5,6 +5,7 @@ import ExpenseForm from '~/components/expenses/ExpenseForm';
 import Modal from '~/components/util/Modal';
 import { updateExpense, deleteExpense } from '~/db/expenses.server';
 import { validateExpenseInput } from '~/db/validation.server';
+import { getUserFromSession } from '~/db/auth.server';
 // import { getExpense } from '~/db/expenses.server';
 
 export default function UpdateExpensesPage() {
@@ -20,6 +21,7 @@ export default function UpdateExpensesPage() {
 }
 
 export async function action({params, request}) {
+  await getUserFromSession(request);
   const expenseId = params.id;
   const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
@@ -36,7 +38,7 @@ export async function action({params, request}) {
     
   } else if(request.method === 'DELETE') {
     await deleteExpense(expenseId);
-    return {id: expenseId}
+    return {expenseId, content: 'deleted successfully'}
   }
 
 }

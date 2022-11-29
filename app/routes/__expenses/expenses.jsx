@@ -4,6 +4,7 @@ import { json } from '@remix-run/node';
 
 import ExpensesList from '~/components/expenses/ExpensesList';
 import { getExpenses } from '~/db/expenses.server';
+import { requireUserSession } from '~/db/auth.server';
 
 
 // const DUMMY_EXPENSES = [
@@ -48,8 +49,10 @@ export default function ExpensesLayout() {
 }
 
 export async function loader({request, params}) {
+  const userId = await requireUserSession(request);
+
   try {
-    const expenses = await getExpenses();
+    const expenses = await getExpenses(userId);
 
     // if (!expenses || expenses.length === 0) {
     //   return json({message: 'Coud not find any expenses!'}, {

@@ -28,6 +28,16 @@ export async function getUserFromSession(request) {
   return userId;
 }
 
+export async function requireUserSession(request) {
+  const userId = await getUserFromSession(request);
+
+  if(!userId) {
+    throw redirect('/auth?mode=login');
+  }
+
+  return userId;
+}
+
 export async function destroyUserSession(request) {
   const session = await sessionStorage.getSession(request.headers.get('Cookie'));
 
