@@ -4,6 +4,7 @@ import { json } from '@remix-run/node';
 
 import ExpensesList from '~/components/expenses/ExpensesList';
 import { getExpenses } from '~/db/expenses.server';
+import { requireUserSession } from '~/db/auth.server';
 
 
 // const DUMMY_EXPENSES = [
@@ -48,6 +49,8 @@ export default function ExpensesLayout() {
 }
 
 export async function loader({request, params}) {
+  await requireUserSession(request);
+  
   try {
     const expenses = await getExpenses();
 
