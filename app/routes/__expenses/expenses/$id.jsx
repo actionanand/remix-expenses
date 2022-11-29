@@ -54,3 +54,13 @@ export async function action({params, request}) {
 //     throw error; 
 //   }
 // }
+
+export function meta({params, location, data, parentsData}) {
+  const expense = parentsData['routes/__expenses/expenses']
+    .find(exp => exp.id === params.id);
+
+  return {
+    title: 'Remix-Expenses - ' + expense.title,
+    description: 'Edit an existing expense with ease.'
+  };
+}

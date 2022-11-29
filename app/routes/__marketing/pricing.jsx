@@ -39,4 +39,19 @@ export default function PricingPage() {
   );
 }
 
-export function meta() {}
+export function meta() {
+  return {
+    title: 'Remix-Expenses Price',
+    description: 'Manage your expenses with ease. This page shows the list of price.'
+  };
+}
+
+export function headers({actionHeaders, loaderHeaders, parentHeaders}) {
+  return {
+    'Cache-Control': parentHeaders.get('Cache-Control')
+  };
+}
+
+export const handle = {
+  disableJs: true
+};

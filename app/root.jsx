@@ -1,4 +1,4 @@
-import { Links, Link, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from '@remix-run/react';
+import { Links, Link, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch, useMatches } from '@remix-run/react';
 
 import sharedStyles from '~/styles/shared.css';
 import Error from './components/util/Error';
@@ -9,12 +9,15 @@ export const meta = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export function Document({children, title='Remix-Expenses'}) {
+export function Document({children, title}) {
+  const matches = useMatches();
+  const disableJs = matches.some(match => match.handle?.disableJs);
+
   return (
     <html lang="en">
       <head>
         <Meta />
-        <title> {title} </title>
+        {title && <title> {title} </title>}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet" />
@@ -23,7 +26,7 @@ export function Document({children, title='Remix-Expenses'}) {
       <body>
         {children}
         <ScrollRestoration />
-        <Scripts />
+        {!disableJs && <Scripts />}
         <LiveReload />
       </body>
     </html>
