@@ -2,12 +2,6 @@
 
 - [Remix Docs](https://remix.run/docs)
 
-## How to create a new Remix app
-
-```sh
-npx create-remix@latest
-```
-
 ## Development
 
 From your terminal:
